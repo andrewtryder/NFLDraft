@@ -307,7 +307,7 @@ class NFLDraft(callbacks.Plugin):
             if v['plr'] != draft2[k]['plr']:  # plr changed. that means pick is in.
                 self.log.info("1: {0}".format(v))
                 self.log.info("2: {0}".format(draft2[k]))
-                mstr = "Round: {0} Pick: {1} :: {2} has picked {3}, {4}".format(ircutils.bold(v['rd']), ircutils.bold(v['pick']), ircutils.bold(draft2[k]['tm']), ircutils.underline(draft2[k]['plr']), draft2[k]['pos'])
+                mstr = "Round: {0} Pick: {1} :: {2} has picked {3}, {4}, {5}".format(ircutils.bold(v['rd']), ircutils.bold(v['pick']), ircutils.bold(draft2[k]['tm']), ircutils.underline(draft2[k]['plr']), draft2[k]['pos'], draft2[k]['col'])
                 self._post(irc, mstr)
                 # figure out who picks next.
                 nextpick = k+1  # this is the number(int) + 1.
