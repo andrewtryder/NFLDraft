@@ -307,16 +307,16 @@ class NFLDraft(callbacks.Plugin):
             if v['plr'] != draft2[k]['plr']:  # plr changed. that means pick is in.
                 self.log.info("1: {0}".format(v))
                 self.log.info("2: {0}".format(draft2[k]))
-                mstr = "Round: {0} Pick: {1} :: {2} has picked {3}, {4}".format(v['rd'], ircutils.bold(v['pick']), ircutils.bold(draft2[k]['tm']), ircutils.underline(draft2[k]['plr']), draft2[k]['pos'])
+                mstr = "Round: {0} Pick: {1} :: {2} has picked {3}, {4}".format(ircutils.bold(v['rd']), ircutils.bold(v['pick']), ircutils.bold(draft2[k]['tm']), ircutils.underline(draft2[k]['plr']), draft2[k]['pos'])
                 self._post(irc, mstr)
                 # figure out who picks next.
-                nextpick = k+2  # this is the number(int) + 1.
-                if nextpick > 254:  # this means the draft is over.
+                nextpick = k+1  # this is the number(int) + 1.
+                if nextpick > 256:  # this means the draft is over.
                     self.log.info("checkdraft: pick is {0}. we have reached the end of the draft.".format(nextpick))
                 else:  # we're not at the last pick.
                     n = draft2[nextpick]  # easier to access. {'rd': rd, 'pick':pick, 'plr':plr, 'col':col, 'pos':pos, 'tm':tm }
                     self.log.info("n = {0}".format(n))
-                    np = "{0} is now on the clock with the {1} pick".format(n['tm'], utils.str.ordinal(nextpick))
+                    np = "{0} is now on the clock with the {1} pick".format(ircutils.bold(n['tm']), ircutils.bold(n['pick']))
                     self._post(irc, np)
             
         # now that we're done checking changes, copy the new into self.games to check against next time.
