@@ -160,17 +160,17 @@ class NFLDraft(callbacks.Plugin):
                 # find all tds.
                 partds = p.findAll('td')
                 pick = partds[0]
-                pick = pick.getText().encode('utf-8')
+                pick = pick.getText().encode('utf-8').strip()
                 tm = partds[1]
-                tm = utils.str.normalizeWhitespace(tm.getText(separator=' ').encode('utf-8'))
+                tm = utils.str.normalizeWhitespace(tm.getText(separator=' ').encode('utf-8').strip())
                 plr = partds[2]
-                plr = utils.str.normalizeWhitespace(plr.getText().encode('utf-8'))
+                plr = utils.str.normalizeWhitespace(plr.getText().encode('utf-8').strip())
                 pos = partds[3]
-                pos = pos.getText().encode('utf-8')
+                pos = pos.getText().encode('utf-8').strip()
                 col = partds[4]
-                col = col.getText().encode('utf-8')
-                rd = partds[0].findPrevious('div', attrs={'class':'draftround'})
-                rd = rd.getText().replace('Round ', '')
+                col = col.getText().encode('utf-8').strip()
+                rd = partds[0].findPrevious('div', attrs={'class':'draftround'}.strip())
+                rd = rd.getText().replace('Round ', '').strip()
                 # now, lets append.
                 d[i] = {'pick':pick, 'plr':plr, 'pos':pos, 'tm':tm, 'col':col, 'rd':rd}
             # return d
