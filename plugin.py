@@ -169,7 +169,7 @@ class NFLDraft(callbacks.Plugin):
                 pos = pos.getText().encode('utf-8').strip()
                 col = partds[4]
                 col = col.getText().encode('utf-8').strip()
-                rd = partds[0].findPrevious('div', attrs={'class':'draftround'}.strip())
+                rd = partds[0].findPrevious('div', attrs={'class':'draftround'})
                 rd = rd.getText().replace('Round ', '').strip()
                 # now, lets append.
                 d[i] = {'pick':pick, 'plr':plr, 'pos':pos, 'tm':tm, 'col':col, 'rd':rd}
