@@ -163,7 +163,7 @@ class NFLDraft(callbacks.Plugin):
                 pick = partds[0]
                 pick = pick.getText().encode('utf-8')
                 tm = partds[1]
-                tm = tm.getText().encode('utf-8')
+                tm = tm.getText(separator=' ').encode('utf-8')
                 plr = partds[2]
                 plr = plr.getText().encode('utf-8')
                 pos = partds[3]
@@ -302,7 +302,7 @@ class NFLDraft(callbacks.Plugin):
         # we then announce the "pick" and also announce what pick/team is next.
         for (k, v) in draft1.items():  # {'rd': rd, 'pick':pick, 'plr':plr, 'col':col, 'pos':pos, 'tm':tm }
             if v['plr'] != draft2[k]['plr']:  # plr changed. that means pick is in.
-                mstr = "Pick: {0} :: {1} has picked {2}, {3}".format(v['pick'], draft2[k]['tm'], draft2[k]['plr'], draft2[k]['pos'])
+                mstr = "Pick: {0} :: {1} has picked {2}, {3}".format(ircutils.bold(v['pick']), ircutils.bold(draft2[k]['tm']), ircutils.underline(draft2[k]['plr']), draft2[k]['pos'])
                 self._post(irc, mstr)
                 # figure out who picks next.
                 nextpick = k+1  # this is the number(int) + 1.
@@ -310,7 +310,8 @@ class NFLDraft(callbacks.Plugin):
                     self.log.info("checkdraft: pick is {0}. we have reached the end of the draft.".format(nextpick))
                 else:  # we're not at the last pick.
                     n = draft2[nextpick]  # easier to access. {'rd': rd, 'pick':pick, 'plr':plr, 'col':col, 'pos':pos, 'tm':tm }
-                    np = "{0} is now on the clock with the {1} pick".format(n['tm'], nextpick)
+                    self.log.info("n = {0}".format(n))
+                    np = "{0} is now on the clock with the {1} pick".format(n['tm'], n['pick'])
                     self._post(irc, np)
             
         # now that we're done checking changes, copy the new into self.games to check against next time.
