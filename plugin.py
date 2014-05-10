@@ -162,9 +162,9 @@ class NFLDraft(callbacks.Plugin):
                 pick = partds[0]
                 pick = pick.getText().encode('utf-8')
                 tm = partds[1]
-                tm = tm.getText(separator=' ').encode('utf-8')
+                tm = utils.str.normalizeWhitespace(tm.getText(separator=' ').encode('utf-8'))
                 plr = partds[2]
-                plr = plr.getText().encode('utf-8')
+                plr = utils.str.normalizeWhitespace(plr.getText().encode('utf-8'))
                 pos = partds[3]
                 pos = pos.getText().encode('utf-8')
                 col = partds[4]
