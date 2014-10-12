@@ -7,14 +7,12 @@
 
 from supybot.test import *
 
-class NFLDraftTestCase(PluginTestCase):
+class NFLDraftTestCase(ChannelPluginTestCase):
     plugins = ('NFLDraft',)
     
     def testNFLDraft(self):
-        self.assertNotError('draftchannel add #test')
-        self.assertNotError('draftchannel del #test')
-        self.assertError('drafton')
-        self.assertError('draftoff')
+        self.assertResponse('draftchannel add #test', "I have enabled draft status updates on #test")
+        self.assertResponse('draftchannel del #test', "I have successfully removed #test")
 
 
 # vim:set shiftwidth=4 tabstop=4 expandtab textwidth=79:
